@@ -61,6 +61,10 @@ Attributes for price data:
 * price_mid_peak_fix - Price of power for the 3rd period (mid peak).
 
 ## Exploratory Data Analysis and Data Visualizations
+Exploratory data analysis is used to gain a holistic understanding of the data.<br/>
+Exploratory data analysis uses statistical techniques and visualizations to gain a better understanding of the statistical properties that the data holds.<br/>
+A copy of this analysis is included in this repository under the file name: James Weber Exploratory Data Analysis.ipynb.
+
 ### 1. Importing Libraries and Data
 To start with data analysis, we must first import libraries which contains the commands we need for analysis.<br/>
 Then we import the data from the client_data(1).csv and price_data(1).csv files into dataframes.
