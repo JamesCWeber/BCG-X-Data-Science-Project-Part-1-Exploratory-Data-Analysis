@@ -60,4 +60,52 @@ Attributes for price data:
 * price_peak_fix - Price of power for the 2nd period (peak).
 * price_mid_peak_fix - Price of power for the 3rd period (mid peak).
 
+## Exploratory Data Analysis and Data Visualizations
+### 1. Importing Libraries and Data
+To start with data analysis, we must first import libraries which contains the commands we need for analysis.<br/>
+Then we import the data from the client_data(1).csv and price_data(1).csv files into dataframes.
 
+```
+# Importing libraries
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+# Use the read_csv() command to import .csv files.
+# Create a client_df dataframe for the client data and a price_df dataframe for the price data.
+
+client_df = pd.read_csv(r'C:/Users/jwebe/Desktop/client_data (1).csv')
+price_df = pd.read_csv(r'C:/Users/jwebe/Desktop/price_data (1).csv')
+```
+<br/>
+
+### 2. Descriptive Statistics for Client and Price Data
+#### 2a. Client Data
+Once we have both client and price data imported into dataframes, we can use the .describe() command to get descriptive statistics for client and price data.<br/>
+Descriptive statistics are statistics that summarizes and describes the main features of a dataset.<br/>
+This includes the the mean, standard deviation, min, max, and the 25% 50% and 75% quartiles for each column.
+
+```
+# Use the .describe() command to get the mean, standard deviation, min, max, and the 25% 50% and 75% quartiles of a dataframe.
+
+client_df.describe()
+```
+
+![Descriptive Statistics for Client Data](Descriptive_Statistics_Client.png)
+Based on the percentile values, we have a lot of highly skewed data.<br/>
+Skewed data occurs when most of the data points are to the right or left side of the mean value.<br/>
+<br/>
+![Skewed Data](Skewed_Data.png)
+<br/>
+Too much skewness degrades the model’s ability to describe typical cases because the model has to deal with rare cases on extreme values.
+
+#### 2b. Price Data
+```
+# Use the .describe() command to get the mean, standard deviation, min, max, and the 25% 50% and 75% quartiles of a dataframe.
+
+client_df.describe()
+```
+![Descriptive Statistics for Price Data](Descriptive_Statistics_Price.png)
+<br/>
+Overall, the price data looks good.
