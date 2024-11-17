@@ -61,12 +61,12 @@ Attributes for price data:
 * price_mid_peak_fix - Price of power for the 3rd period (mid peak).
 
 ## Exploratory Data Analysis and Data Visualizations
-Exploratory data analysis is used to gain a holistic understanding of the data.<br/>
-Exploratory data analysis uses statistical techniques and visualizations to gain a better understanding of the statistical properties that the data holds.<br/>
+Exploratory data analysis is used to gain a holistic understanding of the data.
+Exploratory data analysis uses statistical techniques and visualizations to gain a better understanding of the statistical properties that the data holds.
 A copy of this analysis is included in this repository under the file name: James Weber Exploratory Data Analysis.ipynb.
 
 ### 1. Importing Libraries and Data
-To start with data analysis, we must first import libraries which contains the commands we need for analysis.<br/>
+To start with data analysis, we must first import libraries which contains the commands we need for analysis.
 Then we import the data from the client_data(1).csv and price_data(1).csv files into dataframes.
 
 ```
@@ -86,8 +86,8 @@ price_df = pd.read_csv(r'C:/Users/jwebe/Desktop/price_data (1).csv')
 
 ### 2. Descriptive Statistics for Client and Price Data
 #### 2a. Client Data
-Once we have both client and price data imported into dataframes, we can use the .describe() command to get descriptive statistics for client and price data.<br/>
-Descriptive statistics are statistics that summarizes and describes the main features of a dataset.<br/>
+Once we have both client and price data imported into dataframes, we can use the .describe() command to get descriptive statistics for client and price data.
+Descriptive statistics are statistics that summarizes and describes the main features of a dataset.
 This includes the the mean, standard deviation, min, max, and the 25% 50% and 75% quartiles for each column.
 
 ```
@@ -97,11 +97,12 @@ client_df.describe()
 ```
 
 ![Descriptive Statistics for Client Data](Descriptive_Statistics_Client.png)
-Based on the percentile values, we have a lot of highly skewed data.<br/>
-Skewed data occurs when most of the data points are to the right or left side of the mean value.<br/>
-<br/>
+
+Based on the percentile values, we have a lot of highly skewed data.
+Skewed data occurs when most of the data points are to the right or left side of the mean value.
+
 ![Skewed Data](Skewed_Data.png)
-<br/>
+
 Too much skewness degrades the model’s ability to describe typical cases because the model has to deal with rare cases on extreme values.
 
 #### 2b. Price Data
@@ -111,5 +112,124 @@ Too much skewness degrades the model’s ability to describe typical cases becau
 client_df.describe()
 ```
 ![Descriptive Statistics for Price Data](Descriptive_Statistics_Price.png)
-<br/>
+
 Overall, the price data looks good.
+
+### 3. Churn Data Visualization
+To fully analyze the data, we will need to create visualizations to determine if there are any patterns in the data that cannot be shown with statistics alone. 
+We can get an overall understanding of the churn rate (the percentage of customers who stop doing business with a company) by visualizin the data on a bar chart.
+
+The code below is used to create a dataframe which will count the number of customers who have churned and the number of customers who will continue their business with PowerCo.
+```
+# Create a churn dataframe using the churn column.
+# Use the .value_counts() command to count the number of unique values in the churn column.
+# Use the .reset_index(name = 'churn_count') command to create a dataframe and reset the index.
+
+client_churn_count = client_df['churn'].value_counts().reset_index(name = 'churn_count')
+
+# Use the .astype(str) command to convert the churn column from int data type to string data type.
+# Use the .replace() command to replace 0 with 'Not Churned' and 1 with 'Churned'.
+
+client_churn_count['churn'] = client_churn_count['churn'].astype(str)
+client_churn_count['churn'] = client_churn_count['churn'].replace('0', 
+                                                                  'Not Churned')
+client_churn_count['churn'] = client_churn_count['churn'].replace('1', 
+                                                                  'Churned')
+```
+The code below will create a new column that will calculate the percentage of customers who have or have not churned.
+```
+# Calculate the total number of customers by using the .sum() command to sum all the values in the churn_count column.
+# Create a column called churn_percent and calculate the percentage of customers who have churned and customers who have not churned.
+# Use the .round(2) command to round the values in the churn_percent column to 2 decimal places.
+
+total_churn = client_churn_count['churn_count'].sum()
+client_churn_count['churn_percent'] = (client_churn_count['churn_count']/total_churn) * 100
+client_churn_count['churn_percent'] = client_churn_count['churn_percent'].round(2)
+```
+The code below will create a bar chart using the dataframe that we created,
+```
+# Use the fig, ax = plt.subplots() command to create a set of subplots within one cell.
+
+fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+
+# Use the sns.barplot() command to create a bar plot.
+
+sns.barplot( 
+            data = client_churn_count, 
+            x = 'churn', 
+            y = 'churn_percent').set(title = 'Percent of Customers Churned', 
+                                     xlabel = None, 
+                                     ylabel = None)
+
+ax.bar_label(ax.containers[0])
+```
+![Bar Chart of Churn Percentage](Churn_Bar_Chart.png)<br/>
+The graph above depicts the number of customers who churned compared to the customers who are staying with PowerCo. The percentage of customers who have churned is 9.72%. The ideal churn rate for an established business is approximately 5% to 7%. Although the churn rate for Power is not bad, it could be improved.
+
+### 4. Churn Based on Sales Channels
+Sales channels are methods or pathways businesses use to sells their product or service to customers. Examples of sales channels are retail, mobile apps, social media, and direct sales. By determining the churn rate based on sales channels, we can gain some insight on the types of businesses that will stay with PowerCo or will leave PowerCo.
+
+The code below is used to create a dataframe which group all of PowerCo's customers based on their sales channel. The code will then count the number of customers who have or have not churned for each group.
+```
+# Create a sales channel dataframe using the id, channel_sales, and churn columns.
+
+s_channel = client_df[['id', 
+                       'channel_sales', 
+                       'churn']]
+
+# Use the .grouby() command to group the data based on values in the channel_sales column.
+# Use the .value_counts() command to count the number values in each group.
+# Use the .reset_index(name = 'churn_count') command to create a dataframe and reset the index.
+
+s_channel_churn_count = s_channel['churn'].groupby(s_channel['channel_sales']).value_counts().reset_index(name = 's_channel_churn_count
+```
+The sales channel data is encrypted for privacy. The code below is used to replace the encrypted sales channel with Channel_1, Channel_2, etc. for readability.
+```
+# The values in the channel_sales column are jumbled to protect the privacy of the company.
+# Use the .replace() command to replace sales channel names with names that are more readable (Channel_1, Channel_2, etc.)
+
+s_channel_churn_count['channel_sales'] = s_channel_churn_count['channel_sales'].replace('epumfxlbckeskwekxbiuasklxalciiuu', 
+                                                                                        'Channel_1')
+s_channel_churn_count['channel_sales'] = s_channel_churn_count['channel_sales'].replace('ewpakwlliwisiwduibdlfmalxowmwpci', 
+                                                                                        'Channel_2')
+s_channel_churn_count['channel_sales'] = s_channel_churn_count['channel_sales'].replace('fixdbufsefwooaasfcxdxadsiekoceaa', 
+                                                                                        'Channel_3')
+s_channel_churn_count['channel_sales'] = s_channel_churn_count['channel_sales'].replace('foosdfpfkusacimwkcsosbicdxkicaua', 
+                                                                                        'Channel_4')
+s_channel_churn_count['channel_sales'] = s_channel_churn_count['channel_sales'].replace('lmkebamcaaclubfxadlmueccxoimlema', 
+                                                                                        'Channel_5')
+s_channel_churn_count['channel_sales'] = s_channel_churn_count['channel_sales'].replace('sddiedcslfslkckwlfkdpoeeailfpeds', 
+                                                                                        'Channel_6')
+s_channel_churn_count['channel_sales'] = s_channel_churn_count['channel_sales'].replace('usilxuppasemubllopkaafesmlibmsdf', 
+                                                                                        'Channel_7')
+```
+The next set of code is used to calculate the churn rate for each group.
+```
+# Create a column called s_channel_churn_percent and calculate the percentage of customers who have churned and customers who have not churned.
+# Use the .round(2) command to round the values in the churn_percent column to 2 decimal places.
+# To caculate churn percentage, use the total_churn variable that was calculated in the previous section.
+
+s_channel_churn_count['s_channel_churn_percent'] = (s_channel_churn_count['s_channel_churn_count']/total_churn) * 100
+s_channel_churn_count['s_channel_churn_percent'] = s_channel_churn_count['s_channel_churn_percent'].round(2)
+```
+The last set of code is used to create the bar chart withe the dataframe we created.
+```
+# Use the fig, ax = plt.subplots() command to create a set of subplots within one cell.
+
+fig, ax = plt.subplots(1, 1, figsize=(15, 20))
+
+# Use the sns.barplot() command to create a bar plot.
+
+sns.barplot( 
+            data = s_channel_churn_count, 
+            x = 'channel_sales', 
+            y = 's_channel_churn_percent', 
+            hue = 'churn', 
+            errorbar = None).set(title = 'Percent of Customers by Sales Channel', 
+                                 xlabel = None, 
+                                 ylabel = None)
+
+ax.bar_label(ax.containers[0])
+ax.bar_label(ax.containers[1])
+```
+![Churn Rate Based on Sales Channel](Sales_Channel_Churn.png)
