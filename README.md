@@ -3,10 +3,10 @@
 ## Introduction
 This is Part 1 of a project from the [BCG X Data Science micro-internship](https://www.theforage.com/simulations/bcg/data-science-ccdz). The Boston Consulting Group (BCG) is an American global consulting firm that  partners with leaders in business and society to tackle their most important challenges. It is one of the world's 3 largest consulting firms along with McKinsey & Company and Bain & Company. BCG X is a new initiative from BCG that combines the firm's consulting expertise with tech building and design.
 
-In this task, I take on the role of a junior data analyst employed at BCG X. BCG X's client, a major gas and electricity utility called PowerCo, is concerned about their customers leaving for better offers from other energy providers.
+**In this task, I take on the role of a junior data analyst employed at BCG X. BCG X's client, a major gas and electricity utility called PowerCo, is concerned about their customers leaving for better offers from other energy providers.**
 
 ## Problem Statement
-PowerCo has expressed concern over their customers leaving them for better offers from competing energy companies. This concern is exacerbated by the fact that the energy market has had a lot of change in recent years and there are more options than ever for customers to choose from. During a meeting with the Associate Director of the Data Science team, one potential reason for churn is price sensitivity. I am tasked with investigating this hypothesis. To gain a holistic understanding of the data provided by PowerCo, my first task is to conduct exploratory data analysis.
+PowerCo has expressed concern over their customers leaving them for better offers from competing energy companies. This concern is exacerbated by the fact that the energy market has had a lot of change in recent years and there are more options than ever for customers to choose from. During a meeting with the Associate Director of the Data Science team, **one potential reason for churn is price sensitivity. I am tasked with investigating this hypothesis.** To gain a holistic understanding of the data provided by PowerCo, my first task is to conduct exploratory data analysis.
 
 ## Skills Demonstrated
 * Python
@@ -61,8 +61,8 @@ Attributes for price data:
 * price_mid_peak_fix - Price of power for the 3rd period (mid peak).
 
 ## Exploratory Data Analysis and Data Visualizations
-Exploratory data analysis is used to gain a holistic understanding of the data.
-Exploratory data analysis uses statistical techniques and visualizations to gain a better understanding of the statistical properties that the data holds.
+**Exploratory data analysis is used to gain a holistic understanding of the data.
+Exploratory data analysis uses statistical techniques and visualizations to gain a better understanding of the statistical properties that the data holds.**
 A copy of this analysis is included in this repository under the file name: James Weber Exploratory Data Analysis.ipynb.
 
 ### 1. Importing Libraries and Data
@@ -87,7 +87,7 @@ price_df = pd.read_csv(r'C:/Users/jwebe/Desktop/price_data (1).csv')
 ### 2. Descriptive Statistics for Client and Price Data
 #### 2a. Client Data
 Once we have both client and price data imported into dataframes, we can use the .describe() command to get descriptive statistics for client and price data.
-Descriptive statistics are statistics that summarizes and describes the main features of a dataset.
+**Descriptive statistics are statistics that summarizes and describes the main features of a dataset.**
 This includes the the mean, standard deviation, min, max, and the 25% 50% and 75% quartiles for each column.
 
 ```
@@ -98,12 +98,12 @@ client_df.describe()
 
 ![Descriptive Statistics for Client Data](Descriptive_Statistics_Client.png)
 
-Based on the percentile values, we have a lot of highly skewed data.
+**Based on the percentile values, we have a lot of highly skewed data.**
 Skewed data occurs when most of the data points are to the right or left side of the mean value.
 
 ![Skewed Data](Skewed_Data.png)
 
-Too much skewness degrades the model’s ability to describe typical cases because the model has to deal with rare cases on extreme values.
+**Too much skewness degrades the model’s ability to describe typical cases because the model has to deal with rare cases on extreme values.**
 
 #### 2b. Price Data
 ```
@@ -116,7 +116,7 @@ client_df.describe()
 Overall, the price data looks good.
 
 ### 3. Churn Data Visualization
-To fully analyze the data, we will need to create visualizations to determine if there are any patterns in the data that cannot be shown with statistics alone. 
+**To fully analyze the data, we will need to create visualizations to determine if there are any patterns in the data that cannot be shown with statistics alone.** 
 We can get an overall understanding of the churn rate (the percentage of customers who stop doing business with a company) by visualizin the data on a bar chart.
 
 The code below is used to create a dataframe which will count the number of customers who have churned and the number of customers who will continue their business with PowerCo.
@@ -163,13 +163,14 @@ sns.barplot(
 
 ax.bar_label(ax.containers[0])
 ```
-![Bar Chart of Churn Percentage](Churn_Bar_Chart.png)<br/>
-The graph above depicts the number of customers who churned compared to the customers who are staying with PowerCo. The percentage of customers who have churned is 9.72%. The ideal churn rate for an established business is approximately 5% to 7%. Although the churn rate for Power is not bad, it could be improved.
+![Bar Chart of Churn Percentage](Churn_Bar_Chart.png)
+
+The graph above depicts the number of customers who churned compared to the customers who are staying with PowerCo. **The percentage of customers who have churned is 9.72%. The ideal churn rate for an established business is approximately 5% to 7%. Although the churn rate for PowerCo is not bad, it could be improved.**
 
 ### 4. Churn Based on Sales Channels
-Sales channels are methods or pathways businesses use to sells their product or service to customers. Examples of sales channels are retail, mobile apps, social media, and direct sales. By determining the churn rate based on sales channels, we can gain some insight on the types of businesses that will stay with PowerCo or will leave PowerCo.
+Sales channels are methods or pathways businesses use to sells their product or service to customers. Examples of sales channels are retail, mobile apps, social media, and direct sales. **By determining the churn rate based on sales channels, we can gain some insight on the types of businesses that will stay with PowerCo or will leave PowerCo.**
 
-The code below is used to create a dataframe which group all of PowerCo's customers based on their sales channel. The code will then count the number of customers who have or have not churned for each group.
+The code below is used to create a dataframe which will group all of PowerCo's customers based on their sales channel. The code will then count the number of customers who have or have not churned for each group.
 ```
 # Create a sales channel dataframe using the id, channel_sales, and churn columns.
 
@@ -212,11 +213,11 @@ The next set of code is used to calculate the churn rate for each group.
 s_channel_churn_count['s_channel_churn_percent'] = (s_channel_churn_count['s_channel_churn_count']/total_churn) * 100
 s_channel_churn_count['s_channel_churn_percent'] = s_channel_churn_count['s_channel_churn_percent'].round(2)
 ```
-The last set of code is used to create the bar chart withe the dataframe we created.
+The last set of code is used to create the bar chart with the dataframe we created.
 ```
 # Use the fig, ax = plt.subplots() command to create a set of subplots within one cell.
 
-fig, ax = plt.subplots(1, 1, figsize=(15, 20))
+fig, ax = plt.subplots(1, 1, figsize=(10, 5))
 
 # Use the sns.barplot() command to create a bar plot.
 
@@ -233,3 +234,74 @@ ax.bar_label(ax.containers[0])
 ax.bar_label(ax.containers[1])
 ```
 ![Churn Rate Based on Sales Channel](Sales_Channel_Churn.png)
+
+**Nearly half of PowerCo's customers use Sales Channel 4.** When compared to the total number of PowerCo's customers, 40.63% use Sales Channel 4 and are staying with PowerCo and 5.61% use Sales Channel 4 but have left PowerCo. **If PowerCo has an overall churn rate of 9.72%, then the churn rate of customers who use Sales Channel 4 (5.61%) would indicate that approximately 58% of customers who have left PowerCo use Sales Channel 4. When developing customer retention strategies, attention should be given to customers who use sales channel 4.**
+
+The MISSING sales channel contains nearly a quarter of PowerCo's customers. However, the MISSING sales channel indicates missing data that was added during data cleaning. Further research is needed to determine what the missing data should be.
+
+Channels 1, 3, and 6 do not have customer churn. All customers who use sales channels 1, 3, and 6 are staying with PowerCo. However, they make up a total of .11% of PowerCo's customers. There is not enough customers using  those 3 sales channel to accurately analyze how they affect churn.
+
+### 5. Churn Based on Gas Usage
+Some of PowerCo's customers use electric power only. Other customers use gas only or both electricity and gas. **There may be a pattern of churn based on whether or not customers use gas as a source of power.**
+
+The code below is used to create a dataframe which will group all of PowerCo's customers based on whether they use gas or not. The code will then count the number of customers who have or have not churned for each group.
+```
+# Create a dataframe using the id, has_gas, and churn columns.
+
+gas_usage = client_df[['id', 
+                       'has_gas', 
+                       'churn']]
+
+# Use the .grouby() command to group the data based on values in the has_gas column.
+# Use the .value_counts() command to count the number values in each group.
+# Use the .reset_index(name = 'churn_count') command to create a dataframe and reset the index.
+
+gas_usage_churn_count = gas_usage['churn'].groupby(gas_usage['has_gas']).value_counts().reset_index(name = 'gas_usage_churn_count')
+
+# Use the .astype(str) command to convert the churn column from int data type to string data type.
+# Use the .replace() command to replace one string value with another string value.
+
+gas_usage_churn_count['churn'] = gas_usage_churn_count['churn'].astype(str)
+gas_usage_churn_count['churn'] = gas_usage_churn_count['churn'].replace('0', 
+                                                                        'Not Churned')
+gas_usage_churn_count['churn'] = gas_usage_churn_count['churn'].replace('1', 
+                                                                        'Churned')
+gas_usage_churn_count['has_gas'] = gas_usage_churn_count['has_gas'].replace('f', 
+                                                                            'No Gas')
+gas_usage_churn_count['has_gas'] = gas_usage_churn_count['has_gas'].replace('t', 
+                                                                            'Uses Gas')
+```
+The next set of code is used to calculate the churn rate for each group.
+```
+# Create a column called gas_usage_churn_percent and calculate the percentage of customers who have churned and customers who have not churned.
+# Use the .round(2) command to round the values in the churn_percent column to 2 decimal places.
+# To caculate churn percentage, use the total_churn variable that was calculated in the previous section.
+
+gas_usage_churn_count['gas_usage_churn_percent'] = (gas_usage_churn_count['gas_usage_churn_count']/total_churn) * 100
+gas_usage_churn_count['gas_usage_churn_percent'] = gas_usage_churn_count['gas_usage_churn_percent'].round(2)
+```
+The last group of code is used to create a bar chart with the dataframe we created.
+```
+# Use the fig, ax = plt.subplots() command to create a set of subplots within one cell.
+
+fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+
+# Use the sns.barplot() command to create a bar plot.
+
+sns.barplot( 
+            data = gas_usage_churn_count, 
+            x = 'has_gas', 
+            y = 'gas_usage_churn_percent', 
+            hue = 'churn', 
+            errorbar = None).set(title = 'Percent of Customers by Sales Channel', 
+                                 xlabel = None, 
+                                 ylabel = None)
+
+ax.bar_label(ax.containers[0])
+ax.bar_label(ax.containers[1])
+```
+![Churn Rate Based on Gas_Usage](Gas_Churn.png)
+
+**Over 80% of PowerCo customers do not use gas.** Approximately 8% of PowerCo customers do not use gas and have churned. **If the overall churn rate for PowerCo is 9.72%, the churn rate for customers who do not use gas (8.23%) indicates that approximately 85% of customers who have churned do not use gas. Retention strategies should prioritize customers who do not use gas.**
+
+### 6. Power Consumption Data Distribution
