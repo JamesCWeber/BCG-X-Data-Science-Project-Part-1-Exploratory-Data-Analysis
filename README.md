@@ -305,3 +305,86 @@ ax.bar_label(ax.containers[1])
 **Over 80% of PowerCo customers do not use gas.** Approximately 8% of PowerCo customers do not use gas and have churned. **If the overall churn rate for PowerCo is 9.72%, the churn rate for customers who do not use gas (8.23%) indicates that approximately 85% of customers who have churned do not use gas. Retention strategies should prioritize customers who do not use gas.**
 
 ### 6. Power Consumption Data Distribution
+In section 2a, we discovered that several columns in the client_df dataframe contain skewed data. Let's create visualizations of the power consumption data to visualize the skew. Power consumption data includes the cons_12m, cons_gas_12m, cons_last_month, and imp_cons columns.
+
+The code below is used to create histograms of the 4 columns that contain power consumpion data. In a histogram, each bar represents a range of values. The x axis represents the data value and the y axis represents the number of times the value shows up in the dataset. The taller the bar, the more often a range of values appear in the data.
+```
+# Use the fig, ax = plt.subplots() command to create a set of subplots within one cell.
+
+fig, axs = plt.subplots(4, 1, figsize=(8,25))
+
+# Use the histlot() command to create box plots to see how the data is distributed.
+
+sns.histplot(client_df['cons_12m'].dropna(), 
+             kde = True, 
+             ax = axs[0]).set(title = '12 Month Electricity Consumption Data Distribution')
+
+sns.histplot(client_df[client_df['has_gas'] == 't']['cons_gas_12m'].dropna(), 
+             kde = True, 
+             ax = axs[1]).set(title = '12 Month Gas Consumption Data Distribution')
+
+sns.histplot(client_df['cons_last_month'].dropna(), 
+             kde = True, 
+             ax = axs[2]).set(title = 'Last Month Electricity Consumption Bata Distribution')
+
+sns.histplot(client_df['imp_cons'].dropna(), 
+             kde = True, 
+             ax = axs[3]).set(title = 'Current Paid Consumption Data Distribution')
+```
+![Data Distribtion of Power Consumption Data](Power_Consumption_Data_Distribution.png)
+
+**The histograms for all 4 columns show that energy consumption data are highly, postiviely skewed.** The majority of the data fall on the left side of the histograms and there are outliers on the right side. The outliers are the cause of the very long right tail. **Heavily skewed data can compromise the accuracy of the machine learning model. We will address the skewed data in part 2 of the project.**
+
+### 7. Forecast Data Distribution
+Forecast data are estimates of future power consumption for each customer. Similar to energy consumption, we will create histograms to visualize the data's skewness. Columns that contain forecast data are forecast_cons_12m, forecast_cons_year, forecast_discount_energy, forecast_meter_rent_12m, forecast_price_energy_off_peak, forecast_price_energy_peak, and forecast_price_pow_off_peak.
+
+The code blelow is used to create histograms of the 7 columns that contain power consumpion data.
+```
+# Use the fig, ax = plt.subplots() command to create a set of subplots within one cell.
+
+fig, axs = plt.subplots(7, 1, figsize=(8,45))
+
+# Use the boxplot() command to create box plots to see how the data is distributed.
+
+sns.histplot(client_df['forecast_cons_12m'].dropna(), 
+             kde = True, 
+             ax = axs[0]).set(title = 'Forecasted 12 Month Electricity Consumption Data Distribution')
+
+sns.histplot(client_df['forecast_cons_year'].dropna(), 
+             kde = True, 
+             ax = axs[1]).set(title = 'Forecasted Next Calendar Year Electricity Consumption Data Distribution')
+
+sns.histplot(client_df['forecast_discount_energy'].dropna(), 
+             kde = True, 
+             ax = axs[2]).set(title = 'Forecasted Value of Current Discount Data Distribution')
+
+sns.histplot(client_df['forecast_meter_rent_12m'].dropna(), 
+             kde = True, 
+             ax = axs[3]).set(title = 'Forecasted 2 Month Bill of Meter Rental Data Distribution')
+
+sns.histplot(client_df['forecast_price_energy_off_peak'].dropna(), 
+             kde = True, 
+             ax = axs[4]).set(title = 'Forecasted Energy Price for Off Peak Hours Data Distribution')
+
+sns.histplot(client_df['forecast_price_energy_peak'].dropna(), 
+             kde = True, 
+             ax = axs[5]).set(title = 'Forecasted Energy Price for Peak Hours Data Distribution')
+
+sns.histplot(client_df['forecast_price_pow_off_peak'].dropna(), 
+             kde = True, 
+             ax = axs[6]).set(title = 'Forecasted Power Price for Off Peak Hours Data Distribution')
+```
+![Data Distribtion of Forecast Data](Forecast_Data_Distribution.png)
+
+**The first 3 histograms show highly, positively skewed data. The last 4 histograms show multimodal distribution.** Multimodal distribution occurs when there are more than 1 peak in the distribution of data. **One explanation of for multimodal distribution is that there are muultiple groups in the data.** The peaks represent the mode (the most commonly occuring value) for each group. **Further research is recommended to determine what groups are located in the data containing multimodal distribution.**
+
+## Findings and Conclusion
+After conducting exploratory data analysis on PowerCo's client data, we have made the following discoveries:
+* PowerCo's churn rate is 9.7%. The ideal churn rate is 5%-7% and there is room for PowerCo's churn rate to improve.
+* Approximately 58% of PowerCo's customers who have churned utilize sales channel 4. 
+* Approximately 85% of PowerCo's customers who have churned do not use gas.
+* When developing a retention strategy, focus should be given towards customers who use sales channel 4, do not use gas, or both.
+* Several columns that contain power consumption data and forecast data contain highly skewed data. In part 2, we will tranform the data to deal with the skew.
+* Several columns containing forecast data have multimodal distribution. This indicates that there are more than 1 groups within each column. Further research is recommended to determine these groups.
+
+In part 2 of this project, we will conduct feature engineering, which involves the transformation, removal, and creation of new features.
