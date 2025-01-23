@@ -12,7 +12,7 @@ PowerCo has expressed concern over their customers leaving them for better offer
 * Python
 * Juypiter Notebook
 * Exploratory Data Analysis
-* Data Visualization
+* Data Visualization (Bar Charts, Histograms)
 * Descriptive Statistics
 
 ## Data Sourcing
