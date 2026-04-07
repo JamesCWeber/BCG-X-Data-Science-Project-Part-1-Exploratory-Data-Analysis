@@ -68,7 +68,7 @@ A copy of this analysis is included in this repository under the file name: Jame
 
 ### 1. Importing Libraries and Data
 To start with data analysis, we must first import libraries which contains the commands we need for analysis.
-Then we import the data from the client_data(1).csv and price_data(1).csv files into dataframes.
+Then we import the data from the client_data(1).csv and price_data(1).csv files into dataframes client_df and price_df.
 
 ```
 # Importing libraries
