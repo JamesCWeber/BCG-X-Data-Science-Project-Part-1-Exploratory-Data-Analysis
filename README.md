@@ -294,7 +294,7 @@ sns.barplot(
             x = 'has_gas', 
             y = 'gas_usage_churn_percent', 
             hue = 'churn', 
-            errorbar = None).set(title = 'Percent of Customers by Sales Channel', 
+            errorbar = None).set(title = 'Percent of Customers by Gas Usage', 
                                  xlabel = None, 
                                  ylabel = None)
 
