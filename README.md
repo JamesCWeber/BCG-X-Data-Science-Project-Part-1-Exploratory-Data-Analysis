@@ -118,7 +118,7 @@ Overall, the price data looks good.
 
 ### 3. Churn Data Visualization
 **To fully analyze the data, we will need to create visualizations to determine if there are any patterns in the data that cannot be shown with statistics alone.** 
-We can get an overall understanding of the churn rate (the percentage of customers who stop doing business with a company) by visualizin the data on a bar chart.
+We can get an overall understanding of the churn rate (the percentage of customers who stop doing business with a company) by visualizing the data in a bar chart.
 
 The code below is used to create a dataframe which will count the number of customers who have churned and the number of customers who will continue their business with PowerCo.
 ```
