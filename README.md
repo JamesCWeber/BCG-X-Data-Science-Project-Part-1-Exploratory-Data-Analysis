@@ -377,7 +377,7 @@ sns.histplot(client_df['forecast_price_pow_off_peak'].dropna(),
 ```
 ![Data Distribtion of Forecast Data](Forecast_Data_Distribution.png)
 
-**The first 3 histograms show highly, positively skewed data. The last 4 histograms show multimodal distribution.** Multimodal distribution occurs when there are more than 1 peak in the distribution of data. **One explanation of for multimodal distribution is that there are muultiple groups in the data.** The peaks represent the mode (the most commonly occuring value) for each group. **Further research is recommended to determine what groups are located in the data containing multimodal distribution.**
+**The first 3 histograms show highly, positively skewed data. The last 4 histograms show multimodal distribution.** Multimodal distribution occurs when there are more than 1 peak in the distribution of data. **One explanation of for multimodal distribution is that there are multiple groups in the data.** The peaks represent the mode (the most commonly occuring value) for each group. **Further research is recommended to determine what groups are located in the data containing multimodal distribution.**
 
 ## Findings and Conclusion
 After conducting exploratory data analysis on PowerCo's client data, we have made the following discoveries:
