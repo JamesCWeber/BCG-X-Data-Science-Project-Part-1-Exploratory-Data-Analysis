@@ -110,7 +110,7 @@ Skewed data occurs when most of the data points are to the right or left side of
 ```
 # Use the .describe() command to get the mean, standard deviation, min, max, and the 25% 50% and 75% quartiles of a dataframe.
 
-client_df.describe()
+price_df.describe()
 ```
 ![Descriptive Statistics for Price Data](Descriptive_Statistics_Price.png)
 
